@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JCI Invite Portal - Digital Pass</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet">
+  
+  <!-- QR Code Engine (Client-Side Rendering) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <!-- Tailwind Configuration: Material 3 Royal Blue System -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            m3: {
+              primary: '#1E40AF',          // Core Royal Blue
+              onPrimary: '#FFFFFF',
+              primaryContainer: '#DBEAFE', // M3 Tinted Surface
+              onPrimaryContainer: '#1E3A8A',
+              surface: '#F8FAFC',
+              surfaceContainer: '#FFFFFF',
+              surfaceVariant: '#EEF2F6',
+              outline: '#CBD5E1',
+              error: '#BA1A1A',
+              errorContainer: '#FFDAD6',
+              onErrorContainer: '#410002',
+              success: '#15803D',
+              successContainer: '#DCFCE7',
+              onSuccessContainer: '#14532D',
+            }
+          },
+          borderRadius: {
+            'm3-card': '28px',
+            'm3-pill': '9999px',
+            'm3-input': '16px',
+          },
+          boxShadow: {
+            'm3-elevation-1': '0 1px 3px 1px rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.08)',
+            'm3-elevation-2': '0 4px 12px 0 rgba(30, 64, 175, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.04)',
+            'm3-elevation-3': '0 16px 40px -6px rgba(30, 64, 175, 0.18), 0 6px 16px -2px rgba(30, 64, 175, 0.06)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- External Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-[#F0F4FA] text-slate-900 min-h-screen flex flex-col justify-between antialiased relative overflow-x-hidden selection:bg-m3-primaryContainer selection:text-m3-onPrimaryContainer">
+
+  <!-- ======================================================= -->
+  <!-- BACKGROUND FLUID WAVES CANVAS                           -->
+  <!-- ======================================================= -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden -z-10" aria-hidden="true">
+    
+    <!-- Top Fluid Gradient Header Glow -->
+    <div class="absolute -top-20 left-0 right-0 h-64 bg-gradient-to-b from-blue-200/50 via-sky-100/30 to-transparent blur-xl"></div>
+
+    <!-- Bottom Seamless Wave Container -->
+    <div class="absolute bottom-0 left-0 right-0 h-[280px] sm:h-[360px] w-full overflow-hidden">
+      
+      <!-- Layer 1: Deep Royal Navy (Back) -->
+      <div class="absolute bottom-0 left-0 w-[200%] h-full animate-wave-back opacity-40">
+        <svg viewBox="0 0 2880 320" preserveAspectRatio="none" class="w-full h-full">
+          <path fill="url(#wave-grad-1)" d="M0,160 C320,300 420,40 720,160 C1020,280 1120,40 1440,160 C1760,300 1860,40 2160,160 C2460,280 2560,40 2880,160 L2880,320 L0,320 Z"></path>
+          <defs>
+            <linearGradient id="wave-grad-1" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#1E3A8A" />
+              <stop offset="100%" stop-color="#0F172A" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- Layer 2: Vibrant Royal / Cobalt Blue (Middle) -->
+      <div class="absolute bottom-0 left-0 w-[200%] h-full animate-wave-mid opacity-60">
+        <svg viewBox="0 0 2880 320" preserveAspectRatio="none" class="w-full h-full">
+          <path fill="url(#wave-grad-2)" d="M0,190 C360,60 480,260 720,190 C960,120 1080,300 1440,190 C1800,60 1920,260 2160,190 C2400,120 2520,300 2880,190 L2880,320 L0,320 Z"></path>
+          <defs>
+            <linearGradient id="wave-grad-2" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#2563EB" />
+              <stop offset="100%" stop-color="#1D4ED8" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <!-- Layer 3: Radiant Cerulean / Sky Blue (Front) -->
+      <div class="absolute bottom-0 left-0 w-[200%] h-full animate-wave-front opacity-85">
+        <svg viewBox="0 0 2880 320" preserveAspectRatio="none" class="w-full h-full">
+          <path fill="url(#wave-grad-3)" d="M0,220 C240,140 480,280 720,220 C960,160 1200,300 1440,220 C1680,140 1920,280 2160,220 C2400,160 2640,300 2880,220 L2880,320 L0,320 Z"></path>
+          <defs>
+            <linearGradient id="wave-grad-3" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#38BDF8" />
+              <stop offset="40%" stop-color="#60A5FA" />
+              <stop offset="100%" stop-color="#2563EB" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================= -->
+  <!-- MAIN APP CONTAINER (Centered Card Area)                 -->
+  <!-- ======================================================= -->
+  <div class="flex-1 flex flex-col items-center justify-center p-4 sm:p-6 my-auto relative z-10 w-full">
+    <main class="w-full max-w-md mx-auto">
+
+      <!-- TOP LOGO HEADER (2 Logos with Divider) -->
+      <header class="flex items-center justify-center gap-6 mb-6 px-4">
+        <!-- Logo 1: JCI -->
+        <div class="flex items-center justify-center h-14 w-32 bg-white/90 backdrop-blur-xl rounded-2xl border border-white/90 p-2 shadow-sm transition hover:scale-105 duration-200">
+          <div class="flex items-center gap-1.5 text-m3-primary font-bold text-xs tracking-tight">
+            <span class="material-symbols-rounded text-m3-primary">stars</span>
+            <span>JCI EVENT</span>
+          </div>
+        </div>
+
+        <!-- Separator -->
+        <div class="h-6 w-[1.5px] bg-slate-300/80 rounded-full"></div>
+
+        <!-- Logo 2: Sponsor -->
+        <div class="flex items-center justify-center h-14 w-32 bg-white/90 backdrop-blur-xl rounded-2xl border border-white/90 p-2 shadow-sm transition hover:scale-105 duration-200">
+          <div class="flex items-center gap-1.5 text-slate-700 font-bold text-xs tracking-tight">
+            <span class="material-symbols-rounded text-slate-600">domain</span>
+            <span>SPONSOR</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- CARD CONTAINER (Frosted Glass Material 3) -->
+      <div class="bg-white/90 backdrop-blur-2xl rounded-m3-card shadow-m3-elevation-3 border border-white/95 overflow-hidden transition-all duration-300">
+        
+        <!-- STATE A: ENTER CODE SCREEN -->
+        <section id="view-input" class="p-6 sm:p-8">
+          <div class="text-center mb-6">
+            <div class="inline-flex p-3.5 rounded-full bg-m3-primaryContainer text-m3-onPrimaryContainer mb-3 shadow-inner">
+              <span class="material-symbols-rounded text-2xl">confirmation_number</span>
+            </div>
+            <h1 class="text-2xl font-bold tracking-tight text-slate-900">Access Event Pass</h1>
+            <p class="text-slate-500 text-sm mt-1">Enter the unique code printed on your invitation</p>
+          </div>
+
+          <form id="code-form" onsubmit="handleManualSubmit(event)" class="space-y-4">
+            <div>
+              <label for="input-code" class="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2 ml-1">Invitation Code</label>
+              <div class="relative flex items-center">
+                <span class="material-symbols-rounded absolute left-4 text-slate-400">key</span>
+                <input 
+                  type="text" 
+                  id="input-code" 
+                  placeholder="e.g. 1, 42, or AC-9B2X71" 
+                  required
+                  autocomplete="off"
+                  class="w-full bg-slate-50/90 text-slate-900 text-base font-semibold placeholder:text-slate-400 placeholder:font-normal rounded-m3-input pl-12 pr-4 py-3.5 border-2 border-slate-200/80 focus:border-m3-primary focus:bg-white focus:outline-none transition uppercase tracking-wider shadow-sm"
+                />
+              </div>
+            </div>
+
+            <button 
+              type="submit" 
+              class="w-full bg-m3-primary text-m3-onPrimary rounded-m3-pill py-3.5 px-6 font-semibold text-sm tracking-wide shadow-m3-elevation-2 hover:bg-blue-800 active:scale-[0.99] transition flex items-center justify-center gap-2">
+              <span>Find My Pass</span>
+              <span class="material-symbols-rounded text-lg">arrow_forward</span>
+            </button>
+          </form>
+        </section>
+
+        <!-- STATE B: LOADING INDICATOR -->
+        <section id="view-loading" class="hidden p-12 text-center">
+          <div class="inline-block animate-spin text-m3-primary mb-3">
+            <span class="material-symbols-rounded text-4xl">progress_activity</span>
+          </div>
+          <p class="text-slate-600 font-medium text-sm">Retrieving your credential...</p>
+        </section>
+
+        <!-- STATE C: DIGITAL PASS CARD -->
+        <section id="view-pass" class="hidden flex flex-col">
+          
+          <!-- Header Banner & Attendee Profile -->
+          <div class="p-6 sm:p-8 bg-gradient-to-b from-blue-100/70 via-blue-50/30 to-transparent border-b border-slate-100 text-center relative">
+            
+            <div class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-m3-pill bg-m3-primaryContainer text-m3-onPrimaryContainer font-bold text-xs tracking-wide uppercase mb-3 shadow-sm">
+              <span class="material-symbols-rounded text-sm">verified</span>
+              <span id="pass-category">GENERAL ADMISSION</span>
+            </div>
+
+            <h2 id="pass-name" class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug">
+              Honored Guest
+            </h2>
+
+            <p class="text-xs text-slate-500 font-medium mt-1">
+              Access Code: <span id="pass-code-label" class="font-mono font-bold text-slate-700">AC-XXXXXX</span>
+            </p>
+          </div>
+
+          <!-- Center: QR Code Area -->
+          <div class="p-6 sm:p-8 flex flex-col items-center justify-center bg-white">
+            <div class="p-4 bg-white rounded-3xl border-2 border-dashed border-blue-200 shadow-md flex items-center justify-center">
+              <div id="qrcode-container" class="transition-transform duration-200"></div>
+            </div>
+
+            <!-- Status Indicator Pill -->
+            <div id="pass-status-pill" class="mt-5 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-m3-pill bg-m3-successContainer text-m3-onSuccessContainer text-xs font-semibold shadow-sm">
+              <span class="material-symbols-rounded text-sm">check_circle</span>
+              <span id="pass-status-text">Ready for Check-In</span>
+            </div>
+
+            <p class="text-xs text-slate-500 text-center mt-3 max-w-[240px]">
+              Please present this barcode to the scanner attendant at the entrance.
+            </p>
+          </div>
+
+          <!-- Action Footer -->
+          <div class="p-6 bg-slate-50 border-t border-slate-100 flex flex-col gap-2.5">
+            <button 
+              onclick="downloadQRCode()" 
+              class="w-full bg-m3-primary text-m3-onPrimary rounded-m3-pill py-3 px-4 font-semibold text-sm shadow-m3-elevation-1 hover:bg-blue-800 active:scale-[0.99] transition flex items-center justify-center gap-2">
+              <span class="material-symbols-rounded">download</span>
+              <span>Save Pass to Photos</span>
+            </button>
+
+            <button 
+              onclick="switchCode()" 
+              class="w-full text-slate-600 hover:text-slate-900 font-medium text-xs py-2 text-center transition">
+              Use a different code
+            </button>
+          </div>
+        </section>
+
+        <!-- STATE D: ERROR SCREEN -->
+        <section id="view-error" class="hidden p-8 text-center">
+          <div class="inline-flex p-3 rounded-full bg-m3-errorContainer text-m3-onErrorContainer mb-3 shadow-sm">
+            <span class="material-symbols-rounded text-2xl">error</span>
+          </div>
+          <h2 class="text-xl font-bold text-slate-900">Pass Not Found</h2>
+          <p id="error-message" class="text-slate-500 text-sm mt-2 mb-6">
+            The access code provided does not exist or has been revoked.
+          </p>
+          <button 
+            onclick="switchCode()" 
+            class="inline-flex items-center gap-2 bg-m3-surfaceVariant text-slate-800 rounded-m3-pill py-2.5 px-6 font-semibold text-sm hover:bg-slate-200 transition">
+            <span class="material-symbols-rounded text-base">arrow_back</span>
+            <span>Try Again</span>
+          </button>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ======================================================= -->
+  <!-- RELEVANT STRUCTURED EVENT FOOTER                        -->
+  <!-- ======================================================= -->
+  <footer class="relative z-10 w-full bg-white/70 backdrop-blur-xl border-t border-white/60 pt-6 pb-6 px-4 sm:px-8 text-slate-600 text-xs">
+    <div class="max-w-4xl mx-auto flex flex-col gap-5">
+      
+      <!-- Top Guidance Chips -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center sm:text-left border-b border-slate-200/60 pb-5">
+        <div class="flex items-center justify-center sm:justify-start gap-2.5">
+          <span class="material-symbols-rounded text-m3-primary text-lg">qr_code_scanner</span>
+          <span><strong>Fast Check-In:</strong> Show QR at entrance gates</span>
+        </div>
+        <div class="flex items-center justify-center sm:justify-start gap-2.5">
+          <span class="material-symbols-rounded text-m3-primary text-lg">smartphone</span>
+          <span><strong>Offline Ready:</strong> Save pass to your device</span>
+        </div>
+        <div class="flex items-center justify-center sm:justify-start gap-2.5">
+          <span class="material-symbols-rounded text-m3-primary text-lg">support_agent</span>
+          <span><strong>Assistance:</strong> Approach the helpdesk counter</span>
+        </div>
+      </div>
+
+      <!-- Bottom Metadata & Copyright -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500">
+        <div class="text-center sm:text-left">
+          <p class="font-semibold text-slate-700">Junior Chamber International (JCI)</p>
+          <p class="text-[11px] text-slate-400 mt-0.5">Official Digital Event Credential System &bull; Single-Use Pass</p>
+        </div>
+
+        <div class="flex items-center gap-4 text-[11px]">
+          <span class="hover:text-m3-primary cursor-pointer transition">Event Guidelines</span>
+          <span>&bull;</span>
+          <span class="hover:text-m3-primary cursor-pointer transition">Terms & Privacy</span>
+          <span>&bull;</span>
+          <span class="hover:text-m3-primary cursor-pointer transition">Contact Secretariat</span>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- External JavaScript Logic -->
+  <script src="app.js"></script>
+</body>
+</html>

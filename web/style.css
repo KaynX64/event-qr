@@ -1,0 +1,37 @@
+/* =======================================================
+   MATERIAL SYMBOLS ALIGNMENT
+   ======================================================= */
+   .material-symbols-rounded {
+    vertical-align: middle;
+    font-size: 20px;
+  }
+  
+  /* =======================================================
+     SMOOTH CONTINUOUS HARMONIC WAVES (SEAMLESS 50% LOOP)
+     ======================================================= */
+  @keyframes wave-slide-1 {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+  }
+  
+  @keyframes wave-slide-2 {
+    0% { transform: translate3d(-50%, 0, 0); }
+    100% { transform: translate3d(0, 0, 0); }
+  }
+  
+  @keyframes wave-slide-3 {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
+  }
+  
+  .animate-wave-back {
+    animation: wave-slide-1 26s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+  }
+  
+  .animate-wave-mid {
+    animation: wave-slide-2 19s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+  }
+  
+  .animate-wave-front {
+    animation: wave-slide-3 13s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+  }
