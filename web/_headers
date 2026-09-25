@@ -1,0 +1,2 @@
+/*
+  Content-Security-Policy: default-src 'self' 'unsafe-inline' https: data:; connect-src 'self' https://*.supabase.co;
