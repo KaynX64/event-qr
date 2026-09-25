@@ -11,7 +11,7 @@
  * ========================================================== */
 
 /* ---------- SUPABASE CLIENT ---------- */
-const SUPABASE_URL = 'https://wknedtcorkdgptmcwigm.supabase.co/rest/v1/';  // ← paste yours
+const SUPABASE_URL = 'https://wknedtcorkdgptmcwigm.supabase.co';  // ← paste yours
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndrbmVkdGNvcmtkZ3B0bWN3aWdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMjgyNTUsImV4cCI6MjEwNTkwNDI1NX0.F5aiWGFQIDhZNE1-sTlPgzRvoXH34C8KEV4_QaXSD4k';                    // ← paste yours
 
 /* ---------- CONFIGURATION ---------- */
