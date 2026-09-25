@@ -10,6 +10,10 @@
  *   switchCode()
  * ========================================================== */
 
+/* ---------- SUPABASE CLIENT ---------- */
+const SUPABASE_URL = 'https://wknedtcorkdgptmcwigm.supabase.co/rest/v1/';  // ← paste yours
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndrbmVkdGNvcmtkZ3B0bWN3aWdtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzMjgyNTUsImV4cCI6MjEwNTkwNDI1NX0.F5aiWGFQIDhZNE1-sTlPgzRvoXH34C8KEV4_QaXSD4k';                    // ← paste yours
+
 /* ---------- CONFIGURATION ---------- */
 const CONFIG = {
     MIN_LOADING_MS: 600,          // minimum spinner time for smooth UX
@@ -42,34 +46,43 @@ const CONFIG = {
   
   let _codesCache = null;
   
-  async function fetchCodes() {
-    if (_codesCache) return _codesCache;
-    const res = await fetch(CONFIG.CODES_SOURCE);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    _codesCache = await res.json();
-    return _codesCache;
-  }
-  
   /**
-   * Look up an invite code → return pass data or null.
-   *
-   * ┌─────────────────────────────────────────────────────────┐
-   * │ PHASE 2 — Replace this entire function body with:       │
-   * │                                                         │
-   * │   const res = await fetch(`${API}/lookup`, {            │
-   * │     method: 'POST',                                     │
-   * │     headers: { 'Content-Type': 'application/json' },    │
-   * │     body: JSON.stringify({ code })                      │
-   * │   });                                                   │
-   * │   if (res.status === 404) return null;                  │
-   * │   return await res.json();                              │
-   * └─────────────────────────────────────────────────────────┘
-   */
-  async function lookupPass(rawCode) {
-    const map = await fetchCodes();
-    const key = rawCode.trim().toUpperCase();
-    return map[key] || null;
+ * Look up an invite code via Supabase.
+ *
+ * Replaces the old codes.json approach.
+ * This is the ONLY function that talks to the database.
+ */
+async function lookupPass(rawCode) {
+  const code = rawCode.trim().toUpperCase();
+
+  const res = await fetch(
+    `${SUPABASE_URL}/rest/v1/invites?code=eq.${encodeURIComponent(code)}&select=*`,
+    {
+      headers: {
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Content-Type': 'application/json',
+      },
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error(`Supabase error: ${res.status}`);
   }
+
+  const rows = await res.json();
+  if (!rows || rows.length === 0) return null;
+
+  // Map Supabase row → the shape the UI already expects
+  const row = rows[0];
+  return {
+    token:     row.token,
+    name:      row.guest_name,
+    category:  row.category,
+    codeLabel: row.code,
+    status:    row.status,
+  };
+}
   
   /* ==========================================================
    * FORM HANDLER
