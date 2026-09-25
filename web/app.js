@@ -3,10 +3,10 @@
  */
 
 // ==========================================================================
-// 1. SUPABASE CONFIGURATION
+// 1. SUPABASE CONFIGURATION (LIVE VERIFIED CREDENTIALS)
 // ==========================================================================
-const SUPABASE_URL = "https://xwluratinqcvyqmfuuoa.supabase.co"; // Replace with your Project URL
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3bHVyYXRpbnFjdnlxbWZ1dW9hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNDQ1NTcsImV4cCI6MjEwNTkyMDU1N30.ND-NhlMi_DBo7osQCwAMJGsGsG1t42QL-Eg7830b05Q";                   // Replace with your anon/public key
+const SUPABASE_URL = "https://xwluratinqcvyqmfuuoa.supabase.co";
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3bHVyYXRpbnFjdnlxbWZ1dW9hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNDQ1NTcsImV4cCI6MjEwNTkyMDU1N30.ND-NhlMi_DBo7osQCwAMJGsGsG1t42QL-Eg7830b05Q";
 
 let currentAttendee = null;
 let qrCodeInstance = null;
@@ -70,7 +70,7 @@ function handleManualSubmit(event) {
   const code = elements.inputCode.value.trim().toUpperCase();
   if (!code) return;
 
-  // Update URL in address bar without reloading
+  // Update address bar without triggering a full page reload
   const newUrl = `${window.location.origin}${window.location.pathname}?code=${encodeURIComponent(code)}`;
   window.history.pushState({ path: newUrl }, "", newUrl);
 
@@ -85,17 +85,18 @@ async function fetchAndDisplayPass(code) {
 
   try {
     const endpoint = `${SUPABASE_URL}/rest/v1/attendees?code=eq.${encodeURIComponent(code)}&select=*`;
+    
+    // GET request (no Content-Type to avoid CORS preflight delays)
     const response = await fetch(endpoint, {
       method: "GET",
       headers: {
         "apikey": SUPABASE_ANON_KEY,
-        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`,
-        "Content-Type": "application/json"
+        "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
       }
     });
 
     if (!response.ok) {
-      throw new Error("Unable to connect to the database. Please verify your internet connection.");
+      throw new Error(`Database error: HTTP ${response.status}. Please check your connection.`);
     }
 
     const data = await response.json();
@@ -112,7 +113,7 @@ async function fetchAndDisplayPass(code) {
     elements.passName.textContent = record.full_name;
     elements.passCodeLabel.textContent = record.code;
 
-    // Check Status and Color Codes
+    // Check Status and Apply Material 3 Pill Styling
     if (record.status === "CHECKED_IN") {
       elements.passStatusText.textContent = "Already Checked In";
       elements.passStatusPill.className =
