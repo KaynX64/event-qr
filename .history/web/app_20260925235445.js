@@ -5,8 +5,8 @@
 // ==========================================================================
 // 1. SUPABASE CONFIGURATION
 // ==========================================================================
-const SUPABASE_URL = "https://xwluratinqcvyqmfuuoa.supabase.co"; // Replace with your Project URL
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3bHVyYXRpbnFjdnlxbWZ1dW9hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNDQ1NTcsImV4cCI6MjEwNTkyMDU1N30.ND-NhlMi_DBo7osQCwAMJGsGsG1t42QL-Eg7830b05Q";                   // Replace with your anon/public key
+const SUPABASE_URL = "https://YOUR_PROJECT_ID.supabase.co"; // Replace with your Project URL
+const SUPABASE_ANON_KEY = "YOUR_ANON_KEY";                   // Replace with your anon/public key
 
 let currentAttendee = null;
 let qrCodeInstance = null;
