@@ -1,9 +1,10 @@
 /**
  * JCI Digital Pass Portal - Strict Single-Use Burn Engine
+ * Live Connected with Supabase & Imperial Gala Canvas Exporter
  */
 
 // ==========================================================================
-// 1. SUPABASE CONFIGURATION
+// 1. SUPABASE CONFIGURATION (LIVE VERIFIED)
 // ==========================================================================
 const SUPABASE_URL = "https://xwluratinqcvyqmfuuoa.supabase.co";
 const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh3bHVyYXRpbnFjdnlxbWZ1dW9hIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAzNDQ1NTcsImV4cCI6MjEwNTkyMDU1N30.ND-NhlMi_DBo7osQCwAMJGsGsG1t42QL-Eg7830b05Q";
@@ -132,7 +133,7 @@ async function processStrictSingleUseCode(code) {
       throw new Error(`Failed to update status in database: ${errText}`);
     }
 
-    // 4. Render the pass on the screen so the user can download it
+    // 4. Render pass on screen
     record.status = "CLAIMED";
     renderPassUI(record);
 
@@ -154,7 +155,7 @@ function renderPassUI(record) {
 
   elements.passStatusText.textContent = "Pass Claimed (Save Now)";
   elements.passStatusPill.className =
-    "mt-5 inline-flex items-center gap-1.5 px-3.5 py-1 rounded-m3-pill bg-m3-successContainer text-m3-onSuccessContainer text-xs font-semibold shadow-sm";
+    "mt-6 inline-flex items-center gap-2 px-4 py-1 rounded-full bg-emerald-500/15 border border-emerald-400/40 text-emerald-300 text-xs font-semibold tracking-wider shadow-sm";
 
   // Generate QR Code
   elements.qrContainer.innerHTML = "";
@@ -162,7 +163,7 @@ function renderPassUI(record) {
     text: record.qr_payload,
     width: 200,
     height: 200,
-    colorDark: "#0F172A",
+    colorDark: "#030814",
     colorLight: "#FFFFFF",
     correctLevel: QRCode.CorrectLevel.H,
   });
@@ -171,7 +172,7 @@ function renderPassUI(record) {
 }
 
 // ==========================================================================
-// 6. NAVIGATION & DOWNLOAD
+// 6. NAVIGATION & TICKET EXPORT (Imperial Gala Black-Tie Canvas Ticket)
 // ==========================================================================
 function switchCode() {
   const cleanUrl = `${window.location.origin}${window.location.pathname}`;
@@ -192,52 +193,90 @@ function downloadQRCode() {
     return;
   }
 
+  // Create High-Res Banquet Ticket Canvas (2x Retina scale)
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
   const scale = 2;
 
-  const width = 360 * scale;
-  const height = 480 * scale;
+  const width = 380 * scale;
+  const height = 520 * scale;
 
   canvas.width = width;
   canvas.height = height;
 
-  ctx.fillStyle = "#FFFFFF";
-  ctx.roundRect(0, 0, width, height, 28 * scale);
+  // Background: Deep Obsidian Midnight Card
+  ctx.fillStyle = "#070E1E";
+  ctx.roundRect(0, 0, width, height, 32 * scale);
   ctx.fill();
 
-  ctx.fillStyle = "#1E40AF";
-  ctx.fillRect(0, 0, width, 10 * scale);
+  // Outer Gold Trim
+  ctx.strokeStyle = "#D4AF37";
+  ctx.lineWidth = 2 * scale;
+  ctx.roundRect(6 * scale, 6 * scale, width - 12 * scale, height - 12 * scale, 28 * scale);
+  ctx.stroke();
 
-  ctx.fillStyle = "#DBEAFE";
-  ctx.roundRect(40 * scale, 30 * scale, width - 80 * scale, 28 * scale, 14 * scale);
+  // Top Accent Gold Bar
+  const grad = ctx.createLinearGradient(0, 0, width, 0);
+  grad.addColorStop(0, "#BF953F");
+  grad.addColorStop(0.5, "#FCF6BA");
+  grad.addColorStop(1, "#AA771C");
+  ctx.fillStyle = grad;
+  ctx.fillRect(20 * scale, 16 * scale, width - 40 * scale, 4 * scale);
+
+  // Category Badge
+  ctx.fillStyle = "rgba(212, 175, 55, 0.15)";
+  ctx.roundRect(40 * scale, 35 * scale, width - 80 * scale, 30 * scale, 15 * scale);
   ctx.fill();
+  ctx.strokeStyle = "rgba(212, 175, 55, 0.4)";
+  ctx.lineWidth = 1 * scale;
+  ctx.stroke();
 
   ctx.font = `bold ${11 * scale}px "Plus Jakarta Sans", sans-serif`;
-  ctx.fillStyle = "#1E3A8A";
+  ctx.fillStyle = "#ECC466";
   ctx.textAlign = "center";
-  ctx.fillText(currentAttendee.category.toUpperCase(), width / 2, 48 * scale);
+  ctx.fillText(currentAttendee.category.toUpperCase(), width / 2, 54 * scale);
 
-  ctx.font = `bold ${18 * scale}px "Plus Jakarta Sans", sans-serif`;
-  ctx.fillStyle = "#0F172A";
-  ctx.fillText(currentAttendee.full_name, width / 2, 85 * scale);
+  // Guest Name
+  ctx.font = `bold ${20 * scale}px "Plus Jakarta Sans", sans-serif`;
+  ctx.fillStyle = "#FFFFFF";
+  ctx.fillText(currentAttendee.full_name, width / 2, 98 * scale);
 
+  // Pass Code Label
   ctx.font = `500 ${11 * scale}px monospace`;
-  ctx.fillStyle = "#64748B";
-  ctx.fillText(`ACCESS CODE: ${currentAttendee.code}`, width / 2, 105 * scale);
+  ctx.fillStyle = "#94A3B8";
+  ctx.fillText(`PASS ID: ${currentAttendee.code}`, width / 2, 120 * scale);
 
-  const qrSize = 180 * scale;
+  // White Ceramic Plate for QR (Ensures flawless camera contrast)
+  const plateSize = 220 * scale;
+  const plateX = (width - plateSize) / 2;
+  const plateY = 145 * scale;
+
+  ctx.fillStyle = "#FFFFFF";
+  ctx.roundRect(plateX, plateY, plateSize, plateSize, 20 * scale);
+  ctx.fill();
+
+  // Draw QR
+  const qrSize = 190 * scale;
   const qrX = (width - qrSize) / 2;
-  const qrY = 130 * scale;
+  const qrY = plateY + (plateSize - qrSize) / 2;
   ctx.drawImage(qrCanvas, qrX, qrY, qrSize, qrSize);
 
+  // Security Notice Footer
   ctx.font = `500 ${10 * scale}px "Plus Jakarta Sans", sans-serif`;
-  ctx.fillStyle = "#94A3B8";
-  ctx.fillText("Present this QR at the check-in gate", width / 2, 350 * scale);
-  ctx.fillText("Junior Chamber International (JCI)", width / 2, 440 * scale);
+  ctx.fillStyle = "#CBD5E1";
+  ctx.fillText("Present this QR at the official entrance terminal", width / 2, 410 * scale);
 
+  ctx.font = `bold ${10 * scale}px "Plus Jakarta Sans", sans-serif`;
+  ctx.fillStyle = "#D4AF37";
+  ctx.fillText("JUNIOR CHAMBER INTERNATIONAL (JCI)", width / 2, 455 * scale);
+
+  ctx.font = `400 ${9 * scale}px "Plus Jakarta Sans", sans-serif`;
+  ctx.fillStyle = "#64748B";
+  ctx.fillText("Official Digital Credential • Single-Use Entry", width / 2, 475 * scale);
+
+  // Export to PNG & Trigger Download
   const downloadLink = document.createElement("a");
-  downloadLink.download = `Pass-${currentAttendee.code}.png`;
+  downloadLink.download = `JCI-GALA-PASS-${currentAttendee.code}.png`;
   downloadLink.href = canvas.toDataURL("image/png");
   document.body.appendChild(downloadLink);
   downloadLink.click();

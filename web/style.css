@@ -1,37 +1,101 @@
 /* =======================================================
    MATERIAL SYMBOLS ALIGNMENT
    ======================================================= */
-   .material-symbols-rounded {
-    vertical-align: middle;
-    font-size: 20px;
+.material-symbols-rounded {
+  vertical-align: middle;
+}
+
+/* =======================================================
+   METALLIC GRADIENTS & TYPOGRAPHY
+   ======================================================= */
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #ECC466 0%, #FFF7D6 30%, #D4AF37 70%, #AA771C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-silver-gradient {
+  background: linear-gradient(135deg, #FFFFFF 0%, #CBD5E1 50%, #94A3B8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.font-luxury {
+  font-family: 'Cinzel', serif;
+}
+
+/* =======================================================
+   ORGANIC SOLAR WAVES & MOLTEN LAVA DRIFT (60FPS GPU)
+   ======================================================= */
+@keyframes lava-drift-1 {
+  0% {
+    transform: translate3d(-6%, -4%, 0) rotate(0deg) scale(1);
   }
-  
-  /* =======================================================
-     SMOOTH CONTINUOUS HARMONIC WAVES (SEAMLESS 50% LOOP)
-     ======================================================= */
-  @keyframes wave-slide-1 {
-    0% { transform: translate3d(0, 0, 0); }
-    100% { transform: translate3d(-50%, 0, 0); }
+  50% {
+    transform: translate3d(6%, 8%, 0) rotate(8deg) scale(1.1);
   }
-  
-  @keyframes wave-slide-2 {
-    0% { transform: translate3d(-50%, 0, 0); }
-    100% { transform: translate3d(0, 0, 0); }
+  100% {
+    transform: translate3d(-6%, -4%, 0) rotate(0deg) scale(1);
   }
-  
-  @keyframes wave-slide-3 {
-    0% { transform: translate3d(0, 0, 0); }
-    100% { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes lava-drift-2 {
+  0% {
+    transform: translate3d(8%, -6%, 0) rotate(0deg) scale(1.05);
   }
-  
-  .animate-wave-back {
-    animation: wave-slide-1 26s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+  50% {
+    transform: translate3d(-7%, 5%, 0) rotate(-10deg) scale(0.95);
   }
-  
-  .animate-wave-mid {
-    animation: wave-slide-2 19s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+  100% {
+    transform: translate3d(8%, -6%, 0) rotate(0deg) scale(1.05);
   }
-  
-  .animate-wave-front {
-    animation: wave-slide-3 13s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+}
+
+@keyframes lava-drift-3 {
+  0% {
+    transform: translate3d(0%, 8%, 0) rotate(0deg) scale(1);
   }
+  50% {
+    transform: translate3d(-8%, -6%, 0) rotate(6deg) scale(1.12);
+  }
+  100% {
+    transform: translate3d(0%, 8%, 0) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes solar-pulse {
+  0%, 100% {
+    opacity: 0.45;
+    filter: blur(80px) saturate(1.2);
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.75;
+    filter: blur(100px) saturate(1.6);
+    transform: scale(1.15);
+  }
+}
+
+.animate-molten-1 {
+  animation: lava-drift-1 22s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform;
+}
+
+.animate-molten-2 {
+  animation: lava-drift-2 28s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform;
+}
+
+.animate-molten-3 {
+  animation: lava-drift-3 18s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: transform;
+}
+
+.animate-solar-core {
+  animation: solar-pulse 10s ease-in-out infinite;
+  will-change: transform, opacity;
+}
