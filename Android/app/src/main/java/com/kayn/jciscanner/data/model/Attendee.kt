@@ -1,4 +1,4 @@
-package org.jci.scanner.data.model
+package com.kayn.jciscanner.data.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -9,7 +9,8 @@ data class Attendee(
     val code: String,
     @SerialName("qr_payload") val qrPayload: String,
     @SerialName("full_name") val fullName: String,
-    val category: String = "DELEGATE",
+    val category: String = "INVITED GUEST",
+    @SerialName("table_number") val tableNumber: String = "Table 1",
     var status: String = "ACTIVE", // ACTIVE, CLAIMED, CHECKED_IN, REVOKED
     @SerialName("claimed_at") val claimedAt: String? = null,
     @SerialName("checked_in_at") var checkedInAt: String? = null

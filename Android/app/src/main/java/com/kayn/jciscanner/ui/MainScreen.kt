@@ -1,4 +1,4 @@
-package org.jci.scanner.ui
+package com.kayn.jciscanner.ui
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -9,11 +9,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import org.jci.scanner.data.repository.AttendeeRepository
-import org.jci.scanner.ui.directory.DirectoryTab
-import org.jci.scanner.ui.scanner.ScannerTab
-import org.jci.scanner.ui.status.StatusTab
-import org.jci.scanner.ui.theme.*
+import com.kayn.jciscanner.data.repository.AttendeeRepository
+import com.kayn.jciscanner.ui.directory.DirectoryTab
+import com.kayn.jciscanner.ui.scanner.ScannerTab
+import com.kayn.jciscanner.ui.status.StatusTab
+import com.kayn.jciscanner.ui.theme.*
 
 @Composable
 fun MainScreen(repository: AttendeeRepository) {

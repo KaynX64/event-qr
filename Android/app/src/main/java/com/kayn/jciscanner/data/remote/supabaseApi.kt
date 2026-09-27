@@ -1,8 +1,7 @@
-package org.jci.scanner.data.remote
+package com.kayn.jciscanner.data.remote
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
@@ -10,7 +9,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
-import org.jci.scanner.data.model.Attendee
+import com.kayn.jciscanner.data.model.Attendee
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -31,9 +30,6 @@ class SupabaseApi {
         isLenient = true
     }
 
-    /**
-     * Download entire attendee directory for 0ms offline memory caching
-     */
     suspend fun fetchAllAttendees(): Result<List<Attendee>> = withContext(Dispatchers.IO) {
         try {
             val request = Request.Builder()
@@ -56,9 +52,6 @@ class SupabaseApi {
         }
     }
 
-    /**
-     * Update check-in status on Supabase
-     */
     suspend fun updateCheckInStatus(qrPayload: String, status: String): Result<Boolean> = withContext(Dispatchers.IO) {
         try {
             val isoFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US).apply {
@@ -90,9 +83,6 @@ class SupabaseApi {
         }
     }
 
-    /**
-     * Ping Supabase to test real-time latency (for Tab 3: System Status)
-     */
     suspend fun pingServer(): Long = withContext(Dispatchers.IO) {
         val start = System.currentTimeMillis()
         try {

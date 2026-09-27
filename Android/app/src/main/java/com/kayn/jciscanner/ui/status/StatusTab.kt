@@ -1,4 +1,4 @@
-package org.jci.scanner.ui.status
+package com.kayn.jciscanner.ui.status
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -16,8 +16,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.jci.scanner.data.repository.AttendeeRepository
-import org.jci.scanner.ui.theme.*
+import com.kayn.jciscanner.data.repository.AttendeeRepository
+import com.kayn.jciscanner.ui.theme.*
 
 @Composable
 fun StatusTab(repository: AttendeeRepository) {

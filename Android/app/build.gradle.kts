@@ -5,22 +5,25 @@ plugins {
 }
 
 android {
-    namespace = "org.jci.scanner"
+    namespace = "com.kayn.jciscanner"
     compileSdk = 37
 
     defaultConfig {
-        applicationId = "org.jci.scanner"
+        applicationId = "com.kayn.jciscanner"
         minSdk = 26
         targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 3
+        versionName = "0.1.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    // ========================================================
+    // ---> PUT IT RIGHT HERE INSIDE android { ... } <---
+    // ========================================================
     buildTypes {
-        debug{
-            isDebuggable = false
+        debug {
+            isDebuggable = false // <--- Suppresses the Android 15 16KB dialog
         }
         release {
             isMinifyEnabled = false
@@ -30,10 +33,12 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
+
     buildFeatures {
         compose = true
     }

@@ -1,4 +1,4 @@
-package org.jci.scanner
+package com.kayn.jciscanner
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -15,9 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
-import org.jci.scanner.data.repository.AttendeeRepository
-import org.jci.scanner.ui.MainScreen
-import org.jci.scanner.ui.theme.JCIScannerTheme
+import com.kayn.jciscanner.data.repository.AttendeeRepository
+import com.kayn.jciscanner.ui.MainScreen
+import com.kayn.jciscanner.ui.theme.JCIScannerTheme
 
 class MainActivity : ComponentActivity() {
     private val repository = AttendeeRepository()

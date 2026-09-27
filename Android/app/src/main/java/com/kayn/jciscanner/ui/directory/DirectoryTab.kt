@@ -1,7 +1,8 @@
-package org.jci.scanner.ui.directory
+package com.kayn.jciscanner.ui.directory
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -19,10 +20,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.jci.scanner.data.model.Attendee
-import org.jci.scanner.data.repository.AttendeeRepository
-import org.jci.scanner.ui.theme.*
-import androidx.compose.foundation.border
+import com.kayn.jciscanner.data.model.Attendee
+import com.kayn.jciscanner.data.repository.AttendeeRepository
+import com.kayn.jciscanner.ui.theme.*
 
 @Composable
 fun DirectoryTab(repository: AttendeeRepository) {
@@ -68,7 +68,6 @@ fun DirectoryTab(repository: AttendeeRepository) {
                     Text("$checkedInCount of ${attendees.size} Guests In", fontSize = 18.sp, fontWeight = FontWeight.ExtraBold, color = SterlingSilver)
                 }
 
-                // Mini Percentage Pill
                 val percent = if (attendees.isNotEmpty()) (checkedInCount * 100 / attendees.size) else 0
                 Surface(
                     color = ImperialGold.copy(alpha = 0.15f),
@@ -157,7 +156,6 @@ fun AttendeeCard(attendee: Attendee, onToggleStatus: (String) -> Unit) {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.weight(1f)) {
-                // Initial Badge Avatar with Gold Trim
                 Box(
                     modifier = Modifier
                         .size(42.dp)
@@ -182,9 +180,7 @@ fun AttendeeCard(attendee: Attendee, onToggleStatus: (String) -> Unit) {
                 }
             }
 
-            // Quick Status Actions
             if (attendee.status == "CHECKED_IN") {
-                // Re-Enable Pass Button
                 IconButton(
                     onClick = { onToggleStatus("ACTIVE") },
                     colors = IconButtonDefaults.iconButtonColors(contentColor = ImperialGold)
@@ -192,7 +188,6 @@ fun AttendeeCard(attendee: Attendee, onToggleStatus: (String) -> Unit) {
                     Icon(Icons.Default.Replay, contentDescription = "Re-Enable Pass", modifier = Modifier.size(20.dp))
                 }
             } else {
-                // Manual Check-in Button
                 IconButton(
                     onClick = { onToggleStatus("CHECKED_IN") },
                     colors = IconButtonDefaults.iconButtonColors(contentColor = GalaSuccess)

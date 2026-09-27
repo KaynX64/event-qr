@@ -1,4 +1,4 @@
-package org.jci.scanner.ui.theme
+package com.kayn.jciscanner.ui.theme
 
 import android.app.Activity
 import androidx.compose.material3.MaterialTheme
@@ -9,7 +9,6 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-// The Imperial Gala Theme (Anchored strictly to Royal Blue, Gold & Silver)
 private val GalaColorScheme = darkColorScheme(
     primary = ImperialGold,
     onPrimary = RoyalBlueDeep,

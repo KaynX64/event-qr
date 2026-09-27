@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>JCI Digital Pass - Imperial Solar Gala</title>
+  <title>JCI Dagupan Bangus - Digital Pass Portal</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Google Fonts: Cinzel (Imperial Luxury Serif) + Plus Jakarta Sans + Material Symbols -->
+  <!-- Google Fonts: Cinzel + Plus Jakarta Sans + Material Symbols -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet">
@@ -30,10 +30,10 @@
     <!-- Deep Royal Navy Celestial Background -->
     <div class="absolute inset-0 bg-gradient-to-b from-[#02050E] via-[#050E24] to-[#01040A]"></div>
 
-    <!-- Solar Flare Ambient Core (Glowing Molten Magma Pulse) -->
+    <!-- Solar Flare Ambient Core -->
     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[900px] h-[700px] sm:h-[900px] rounded-full bg-gradient-to-tr from-blue-700/30 via-amber-500/25 to-yellow-300/15 animate-solar-core"></div>
 
-    <!-- Upper Molten Gold Wave Swirl (Sweeping down from top-right) -->
+    <!-- Upper Molten Gold Wave Swirl -->
     <div class="absolute -top-[25%] -right-[20%] w-[140%] h-[110%] opacity-65 animate-molten-1">
       <svg viewBox="0 0 1000 800" preserveAspectRatio="none" class="w-full h-full">
         <defs>
@@ -48,7 +48,7 @@
       </svg>
     </div>
 
-    <!-- Fluid Liquid Silver Wave Ribbon (Weaving through center & sides) -->
+    <!-- Fluid Liquid Silver Wave Ribbon -->
     <div class="absolute -top-[10%] -left-[25%] w-[150%] h-[120%] opacity-55 animate-molten-2 mix-blend-screen">
       <svg viewBox="0 0 1000 800" preserveAspectRatio="none" class="w-full h-full">
         <defs>
@@ -63,7 +63,7 @@
       </svg>
     </div>
 
-    <!-- Bottom & Perimeter Solar Flare Wave (Deep Gold & Bronze Magma) -->
+    <!-- Bottom & Perimeter Solar Flare Wave -->
     <div class="absolute -bottom-[20%] -left-[15%] w-[130%] h-[100%] opacity-70 animate-molten-3">
       <svg viewBox="0 0 1000 800" preserveAspectRatio="none" class="w-full h-full">
         <defs>
@@ -88,27 +88,49 @@
   <div class="flex-1 flex flex-col items-center justify-center p-4 sm:p-6 my-auto relative z-10 w-full">
     <main class="w-full max-w-md mx-auto">
 
-      <!-- TOP BRANDING HEADER -->
-      <header class="flex items-center justify-center gap-5 mb-7 px-4">
-        <!-- Logo 1: JCI Emblem -->
-        <div class="flex items-center gap-2 px-4 py-2 bg-[#050C1B]/80 backdrop-blur-xl rounded-2xl border border-amber-400/40 shadow-[0_4px_25px_rgba(212,175,55,0.2)]">
-          <span class="material-symbols-rounded text-amber-400 text-xl">stars</span>
-          <span class="font-luxury font-bold text-xs tracking-[0.2em] text-gold-gradient">JCI GALA</span>
-        </div>
+      <!-- UNIFIED GALA MARQUEE HEADER -->
+      <header class="w-full max-w-md mx-auto mb-6 px-1">
+        <div class="relative flex items-center justify-between p-3 sm:p-4 bg-gradient-to-r from-[#07132B]/95 via-[#0A1A3A]/95 to-[#07132B]/95 backdrop-blur-2xl rounded-3xl border border-amber-400/40 shadow-[0_15px_40px_rgba(0,0,0,0.8),0_0_25px_rgba(212,175,55,0.15)] overflow-hidden">
+          
+          <!-- LEFT: Golden Leaping Bangus -->
+          <div class="relative w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 flex items-center justify-center">
+            <img 
+              src="assets/fish-logo.jpg" 
+              alt="Golden Bangus Motif" 
+              class="w-full h-full object-contain mix-blend-screen scale-110"
+              onerror="this.src='assets/fish-logo.png'"
+            />
+          </div>
 
-        <div class="h-4 w-[1px] bg-gradient-to-b from-transparent via-amber-400/80 to-transparent"></div>
+          <!-- CENTER: Official Gala Chapter Title -->
+          <div class="flex-1 flex flex-col items-center justify-center text-center px-2">
+            <span class="text-[9px] font-bold text-amber-300/80 tracking-[0.3em] uppercase">OFFICIAL PORTAL</span>
+            <h3 class="font-luxury text-sm sm:text-base font-black text-gold-gradient tracking-wider leading-tight mt-0.5">
+              JCI DAGUPAN BANGUS
+            </h3>
+            <div class="flex items-center gap-1.5 mt-1 opacity-70">
+              <div class="h-[1px] w-6 bg-gradient-to-r from-transparent to-amber-400"></div>
+              <span class="text-[8px] font-semibold text-slate-300 tracking-[0.2em] uppercase">75th Anniversary</span>
+              <div class="h-[1px] w-6 bg-gradient-to-l from-transparent to-amber-400"></div>
+            </div>
+          </div>
 
-        <!-- Logo 2: Partner / Sponsor -->
-        <div class="flex items-center gap-2 px-4 py-2 bg-[#050C1B]/80 backdrop-blur-xl rounded-2xl border border-slate-400/30 shadow-[0_4px_20px_rgba(255,255,255,0.05)]">
-          <span class="material-symbols-rounded text-slate-300 text-lg">workspace_premium</span>
-          <span class="font-semibold text-xs tracking-wider text-silver-gradient">PARTNER</span>
+          <!-- RIGHT: Official JCI Dagupan Bangus Logo -->
+          <div class="relative w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 rounded-2xl overflow-hidden border border-amber-400/50 shadow-md">
+            <img 
+              src="assets/jci-logo.jpg" 
+              alt="JCI Dagupan Bangus" 
+              class="w-full h-full object-cover"
+              onerror="this.src='assets/jci-logo.png'"
+            />
+          </div>
+
         </div>
       </header>
 
       <!-- FLOATING OBSIDIAN & GILDED GLASS CARD -->
       <div class="relative bg-gradient-to-b from-[#0C172E]/95 via-[#070E1E]/95 to-[#030814]/98 backdrop-blur-3xl rounded-[34px] p-[1.5px] shadow-[0_25px_80px_-15px_rgba(0,0,0,0.9),0_0_45px_rgba(212,175,55,0.2)]">
         
-        <!-- Double Border Rim -->
         <div class="absolute inset-0 rounded-[34px] bg-gradient-to-br from-amber-300/60 via-slate-300/30 to-amber-500/50 -z-10 pointer-events-none"></div>
 
         <div class="rounded-[32px] overflow-hidden bg-[#070F22]/90">
@@ -139,7 +161,7 @@
                   <input 
                     type="text" 
                     id="input-code" 
-                    placeholder="e.g. 1, 42, or AC-9B2X71" 
+                    placeholder="INVITATION CODE" 
                     required
                     autocomplete="off"
                     class="w-full bg-[#030917]/90 text-amber-100 font-mono text-base font-bold placeholder:text-slate-600 placeholder:font-sans rounded-2xl pl-12 pr-4 py-4 border border-amber-400/40 focus:border-amber-300 focus:shadow-[0_0_25px_rgba(212,175,55,0.35)] focus:outline-none transition uppercase tracking-widest"
@@ -172,27 +194,41 @@
           <section id="view-pass" class="hidden flex flex-col">
             
             <!-- Pass Header Plate -->
-            <div class="p-7 text-center relative border-b border-amber-400/20 bg-gradient-to-b from-[#13254C]/80 via-[#0A172F]/50 to-transparent">
+            <div class="p-6 sm:p-7 text-center relative border-b border-amber-400/20 bg-gradient-to-b from-[#13254C]/80 via-[#0A172F]/50 to-transparent">
               
               <!-- Category Pill -->
-              <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-400/20 via-amber-300/30 to-amber-400/20 border border-amber-300/50 text-amber-200 text-[11px] font-luxury font-bold tracking-[0.25em] uppercase mb-4 shadow-sm">
-                <span class="material-symbols-rounded text-sm text-amber-400">shield</span>
-                <span id="pass-category">VIP DELEGATE</span>
+              <div class="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-gradient-to-r from-amber-400/20 via-amber-300/30 to-amber-400/20 border border-amber-300/50 text-amber-200 text-[10px] font-luxury font-bold tracking-[0.25em] uppercase mb-2.5 shadow-sm">
+                <span class="material-symbols-rounded text-sm text-amber-400">stars</span>
+                <span id="pass-category">INVITED GUEST</span>
               </div>
 
               <!-- Guest Name -->
-              <h2 id="pass-name" class="font-luxury text-2xl sm:text-3xl font-extrabold text-slate-100 tracking-wide leading-tight mb-2">
+              <h2 id="pass-name" class="font-luxury text-lg sm:text-xl font-extrabold text-slate-100 tracking-wide leading-snug w-full px-2 text-center [text-wrap:balance] my-1">
                 Honored Guest
               </h2>
 
-              <p class="text-xs text-slate-400 font-mono tracking-wider">
+              <!-- FANCY GILDED CIRCULAR TABLE MEDALLION -->
+              <div class="relative mx-auto my-3 w-32 h-32 flex items-center justify-center">
+                <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-amber-500/35 via-yellow-400/20 to-blue-600/30 blur-md animate-pulse"></div>
+                <div class="absolute -inset-1.5 rounded-full border border-dashed border-amber-400/40 animate-[spin_40s_linear_infinite]"></div>
+
+                <div class="relative w-full h-full rounded-full bg-gradient-to-b from-[#162B57] via-[#09152E] to-[#030814] border-2 border-amber-400/80 shadow-[0_0_25px_rgba(212,175,55,0.35),inset_0_2px_10px_rgba(255,245,180,0.3)] flex flex-col items-center justify-center p-2 text-center">
+                  <div class="absolute inset-1.5 rounded-full border border-amber-300/40 pointer-events-none"></div>
+
+                  <span class="text-[9px] font-bold tracking-[0.25em] uppercase text-amber-300/90 leading-none mb-1">TABLE</span>
+                  <span id="pass-table" class="font-luxury text-2xl sm:text-3xl font-black text-gold-gradient tracking-tight leading-none px-2 max-w-[100px] truncate">--</span>
+                  <span class="text-[8px] font-semibold tracking-widest uppercase text-slate-400 leading-none mt-1">RESERVED</span>
+                </div>
+              </div>
+
+              <!-- Pass Identifier -->
+              <p class="text-[11px] text-slate-400 font-mono tracking-wider mt-2">
                 PASS IDENTIFIER: <span id="pass-code-label" class="text-amber-300 font-bold">AC-XXXXXX</span>
               </p>
             </div>
 
-            <!-- Pass QR Body (Solid White Ceramic Plaque for Flawless Camera Scanning) -->
+            <!-- Pass QR Body -->
             <div class="p-7 flex flex-col items-center justify-center bg-gradient-to-b from-[#081224] to-[#040915]">
-              
               <div class="p-4 bg-white rounded-3xl shadow-[0_0_40px_rgba(212,175,55,0.25),0_15px_35px_rgba(0,0,0,0.9)] border-2 border-amber-400/60 flex items-center justify-center relative">
                 <div id="qrcode-container"></div>
               </div>
@@ -217,8 +253,9 @@
                 <span>Download Banquet Pass</span>
               </button>
 
+              <!-- SWITCH CODE BUTTON (Triggers Confirmation Modal) -->
               <button 
-                onclick="switchCode()" 
+                onclick="requestSwitchCode()" 
                 class="w-full text-slate-400 hover:text-amber-300 font-medium text-xs py-1.5 text-center transition tracking-wider">
                 Enter another invitation key
               </button>
@@ -237,7 +274,7 @@
               The invitation code provided is invalid or has already been consumed.
             </p>
             <button 
-              onclick="switchCode()" 
+              onclick="requestSwitchCode()" 
               class="inline-flex items-center gap-2 bg-slate-800/80 text-amber-200 border border-amber-400/40 rounded-xl py-2.5 px-6 font-semibold text-xs uppercase tracking-wider hover:bg-slate-700 transition">
               <span class="material-symbols-rounded text-sm">arrow_back</span>
               <span>Try Again</span>
@@ -249,13 +286,43 @@
     </main>
   </div>
 
+  <!-- ======================================================= -->
+  <!-- CONFIRMATION MODAL: ACCIDENTAL CLICK PROTECTION         -->
+  <!-- ======================================================= -->
+  <div id="modal-switch-confirm" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-all duration-300">
+    <div class="relative w-full max-w-sm bg-gradient-to-b from-[#0F2042] via-[#071126] to-[#030814] rounded-3xl border-2 border-amber-400/60 p-6 shadow-[0_20px_50px_rgba(0,0,0,0.9),0_0_30px_rgba(212,175,55,0.2)] text-center">
+      
+      <div class="inline-flex p-3 rounded-2xl bg-amber-400/15 border border-amber-400/30 text-amber-300 mb-3">
+        <span class="material-symbols-rounded text-2xl">warning</span>
+      </div>
+
+      <h3 class="font-luxury text-lg font-bold text-slate-100">Leave Current Pass?</h3>
+      <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+        Make sure you have saved or downloaded your QR pass. Once you leave, this single-use code cannot be entered again.
+      </p>
+
+      <div class="flex gap-3 mt-6">
+        <button 
+          onclick="closeSwitchModal()" 
+          class="flex-1 py-3 px-4 rounded-xl border border-slate-600 bg-slate-800/80 text-slate-300 text-xs font-bold uppercase tracking-wider hover:bg-slate-700 transition">
+          Stay Here
+        </button>
+        <button 
+          onclick="confirmSwitchCode()" 
+          class="flex-1 py-3 px-4 rounded-xl bg-amber-500/20 border border-amber-400/60 text-amber-300 text-xs font-bold uppercase tracking-wider hover:bg-amber-400/30 transition">
+          Yes, Leave
+        </button>
+      </div>
+
+    </div>
+  </div>
+
   <!-- LUXURY FOOTER -->
   <footer class="relative z-10 w-full bg-[#02050E]/85 backdrop-blur-xl border-t border-amber-400/20 py-5 px-6 text-center text-slate-500 text-xs">
-    <p class="font-luxury text-[11px] text-amber-200/70 tracking-[0.25em] uppercase">Junior Chamber International</p>
+    <p class="font-luxury text-[11px] text-amber-200/70 tracking-[0.25em] uppercase">Junior Chamber International • Dagupan Bangus</p>
     <p class="text-[10px] text-slate-500 mt-1">Official Digital Credential System &bull; Single-Use Pass</p>
   </footer>
 
-  <!-- Connect to logic -->
   <script src="app.js"></script>
 </body>
 </html>

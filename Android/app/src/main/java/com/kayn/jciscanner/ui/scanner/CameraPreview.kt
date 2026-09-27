@@ -1,4 +1,4 @@
-package org.jci.scanner.ui.scanner
+package com.kayn.jciscanner.ui.scanner
 
 import android.view.ViewGroup
 import androidx.camera.core.CameraSelector
@@ -9,6 +9,7 @@ import androidx.camera.view.PreviewView
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.viewinterop.AndroidView
@@ -18,12 +19,16 @@ import java.util.concurrent.Executors
 
 @Composable
 fun CameraPreview(
+    isScanningEnabled: Boolean,
     onQrCodeScanned: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val cameraExecutor = remember { Executors.newSingleThreadExecutor() }
+
+    // Ensures analyzer always reads the live pause/resume state
+    val enabledState = rememberUpdatedState(isScanningEnabled)
 
     AndroidView(
         modifier = modifier.fillMaxSize(),
@@ -48,7 +53,13 @@ fun CameraPreview(
                     .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                     .build()
                     .also {
-                        it.setAnalyzer(cameraExecutor, QrCodeAnalyzer(onQrCodeScanned))
+                        it.setAnalyzer(
+                            cameraExecutor,
+                            QrCodeAnalyzer(
+                                isScanningEnabled = { enabledState.value },
+                                onQrCodeDetected = onQrCodeScanned
+                            )
+                        )
                     }
 
                 val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA

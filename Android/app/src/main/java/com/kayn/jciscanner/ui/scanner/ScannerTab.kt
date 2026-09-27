@@ -1,4 +1,4 @@
-package org.jci.scanner.ui.scanner
+package com.kayn.jciscanner.ui.scanner
 
 import android.content.Context
 import android.hardware.camera2.CameraManager
@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -23,20 +24,16 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.StrokeCap
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import org.jci.scanner.data.model.ScanResult
-import org.jci.scanner.data.repository.AttendeeRepository
-import org.jci.scanner.ui.theme.*
-import androidx.compose.foundation.BorderStroke
+import com.kayn.jciscanner.data.model.ScanResult
+import com.kayn.jciscanner.data.repository.AttendeeRepository
+import com.kayn.jciscanner.ui.theme.*
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -45,13 +42,19 @@ fun ScannerTab(repository: AttendeeRepository) {
     var scanResult by remember { mutableStateOf<ScanResult?>(null) }
     var isFlashOn by remember { mutableStateOf(false) }
 
+    // Scanner is active ONLY when no popup is displayed
+    val isScanningEnabled = scanResult == null
+
     Box(modifier = Modifier.fillMaxSize()) {
         // 1. Camera Viewport
         CameraPreview(
+            isScanningEnabled = isScanningEnabled,
             onQrCodeScanned = { rawPayload ->
-                val result = repository.processScan(rawPayload)
-                scanResult = result
-                triggerHapticFeedback(context, result)
+                if (scanResult == null) {
+                    val result = repository.processScan(rawPayload)
+                    scanResult = result
+                    triggerHapticFeedback(context, result)
+                }
             }
         )
 
@@ -103,13 +106,19 @@ fun ScannerTab(repository: AttendeeRepository) {
                     modifier = Modifier.padding(horizontal = 14.dp, vertical = 7.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Box(modifier = Modifier.size(7.dp).background(ImperialGold, CircleShape))
+                    Box(modifier = Modifier.size(7.dp).background(if (isScanningEnabled) ImperialGold else Color.Gray, CircleShape))
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text("SCANNER ACTIVE", color = SterlingSilver, fontSize = 11.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.sp)
+                    Text(
+                        text = if (isScanningEnabled) "ALIGN QR IN BOX" else "SCANNER PAUSED",
+                        color = SterlingSilver,
+                        fontSize = 11.sp,
+                        fontWeight = FontWeight.Bold,
+                        letterSpacing = 1.sp
+                    )
                 }
             }
 
-            // Torch Button (Crucial for dim gala halls)
+            // Torch Button
             IconButton(
                 onClick = {
                     isFlashOn = !isFlashOn
@@ -128,7 +137,7 @@ fun ScannerTab(repository: AttendeeRepository) {
             }
         }
 
-        // 4. Luxury VIP Check-In Bottom Sheet
+        // 4. Luxury Check-In Bottom Sheet
         scanResult?.let { result ->
             ModalBottomSheet(
                 onDismissRequest = { scanResult = null },
@@ -150,7 +159,6 @@ fun ScannerTab(repository: AttendeeRepository) {
                 ) {
                     when (result) {
                         is ScanResult.Success -> {
-                            // Category Tag
                             Surface(
                                 color = ImperialGold.copy(alpha = 0.15f),
                                 shape = RoundedCornerShape(12.dp),
@@ -162,7 +170,7 @@ fun ScannerTab(repository: AttendeeRepository) {
                                 ) {
                                     Icon(Icons.Default.Shield, null, tint = ImperialGold, modifier = Modifier.size(13.dp))
                                     Spacer(modifier = Modifier.width(6.dp))
-                                    Text(result.attendee.category.uppercase(), color = ImperialGoldLight, fontSize = 11.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.5.sp)
+                                    Text("INVITED GUEST", color = ImperialGoldLight, fontSize = 11.sp, fontWeight = FontWeight.Bold, letterSpacing = 1.5.sp)
                                 }
                             }
 
@@ -172,7 +180,6 @@ fun ScannerTab(repository: AttendeeRepository) {
 
                             Spacer(modifier = Modifier.height(18.dp))
 
-                            // Success Banner
                             Surface(
                                 color = GalaSuccessContainer,
                                 shape = RoundedCornerShape(16.dp),
@@ -215,13 +222,13 @@ fun ScannerTab(repository: AttendeeRepository) {
 
                         is ScanResult.NotFound -> {
                             Text("INVALID PASS", color = GalaError, fontWeight = FontWeight.Bold, fontSize = 18.sp)
-                            Text("QR Code not recognized in guest registry", color = SilverMuted, fontSize = 12.sp)
+                            Text("QR Code not recognized in registry", color = SilverMuted, fontSize = 12.sp)
                         }
                     }
 
                     Spacer(modifier = Modifier.height(24.dp))
 
-                    // Next Guest Button
+                    // Re-arms the scanner when clicked!
                     Button(
                         onClick = { scanResult = null },
                         colors = ButtonDefaults.buttonColors(containerColor = ImperialGold, contentColor = RoyalBlueDeep),
